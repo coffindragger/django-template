@@ -27,6 +27,9 @@ DATABASES = {
 # Use django debug_toolbar if present
 try:
   import debug_toolbar
+  from defaults import MIDDLEWARE_CLASSES, INSTALLED_APPS
+  MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES)
+  INSTALLED_APPS = list(INSTALLED_APPS)
   MIDDLEWARE_CLASSES.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
   INSTALLED_APPS.append('debug_toolbar')
   INTERNAL_IPS = (

@@ -10,8 +10,8 @@ from django.views.generic.base import RedirectView
 from mainsite.views import HomePageView
 
 
-handler404 = 'mainsite.view.error404'
-handler500 = 'mainsite.view.error500'
+handler404 = 'mainsite.views.error404'
+handler500 = 'mainsite.views.error500'
 urlpatterns = [
     # In production these should be served directly by http server
     url(r'^favicon\.png[/]?$', RedirectView.as_view(permanent=True, url='{}images/favicon.png'.format(settings.STATIC_URL))),

@@ -11,6 +11,8 @@ DEBUG_ERRORS = True
 DEBUG_STATIC = True
 DEBUG_MEDIA = True
 
+SECRET_KEY = '{{secret_key}}'
+
 
 
 # Database

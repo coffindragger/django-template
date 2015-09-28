@@ -3,26 +3,32 @@ Default Django settings for the project.
 """
 
 import os
+import sys
 from mainsite import TOP_DIR
 
+from .fragments import load_settings_fragment
+settings_fragment = lambda f: globals().update(load_settings_fragment(f))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^f(f=t2_=(z#0j-*&+f#i!yi(5k*-&b^^%hpp)^!ctts^0dl4-'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+###
+#
+# Miscellaneous
+#
+###
 
 SITE_ID = 1
 
+ROOT_URLCONF = 'mainsite.urls'
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
+WSGI_APPLICATION = 'mainsite.wsgi.application'
+
+
+###
+#
+# Internationalization / Localization
+#
+###
 
 LANGUAGE_CODE = 'en-us'
 
@@ -35,22 +41,18 @@ USE_L10N = True
 USE_TZ = True
 
 
-ROOT_URLCONF = 'mainsite.urls'
-
-WSGI_APPLICATION = 'mainsite.wsgi.application'
-
-
 ###
 #
 # Static files
 #
 ###
 
-STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(TOP_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(TOP_DIR, 'breakdown', 'static'),
 ]
+
+settings_fragment('static')
 
 
 ###

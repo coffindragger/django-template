@@ -10,6 +10,21 @@ from .fragments import load_settings_fragment
 settings_fragment = lambda f: globals().update(load_settings_fragment(f))
 
 
+###
+#
+# Installed Apps
+#
+###
+
+INSTALLED_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+)
+
 
 ###
 #
@@ -43,14 +58,9 @@ USE_TZ = True
 
 ###
 #
-# Static files
+# Static Files
 #
 ###
-
-STATIC_ROOT = os.path.join(TOP_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(TOP_DIR, 'breakdown', 'static'),
-]
 
 settings_fragment('static')
 
@@ -60,11 +70,10 @@ settings_fragment('static')
 # Media Files
 #
 ###
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(TOP_DIR, 'mediafiles')
 ADMIN_MEDIA_PREFIX = STATIC_URL+'admin/'
-
+settings_fragment('media')
 
 
 ##
@@ -73,25 +82,8 @@ ADMIN_MEDIA_PREFIX = STATIC_URL+'admin/'
 #
 ##
 
-FIXTURE_DIRS = [
-    os.path.join(TOP_DIR, 'fixtures'),
-]
+settings_fragment('fixtures')
 
-
-###
-#
-# Installed Apps
-#
-###
-
-INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-)
 
 
 ###
@@ -100,18 +92,7 @@ INSTALLED_APPS = (
 #
 ###
 
-MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'mainsite.middleware.TrailingSlashMiddleware',
-)
-APPEND_SLASH = False
+settings_fragment('middleware')
 
 
 ### 
@@ -120,37 +101,50 @@ APPEND_SLASH = False
 #
 ###
 
-TEMPLATES = [
-    # Jinja2 Teplates: ./breakdown/templates/jinja/*
-    {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
-        'DIRS': [
-            os.path.join(TOP_DIR, 'breakdown', 'jinja2'),
-        ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'environment': 'mainsite.template.jinja2_environment',
-        },
-    },
-
-    # Django Templates: ./breakdown/templates/django/*
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(TOP_DIR, 'breakdown', 'templates'),
-        ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-
-]
+settings_fragment('templates')
 
 
 
+### 
+#
+# Caching
+#
+###
+
+settings_fragment('caches')
+
+
+### 
+#
+# Databases
+#
+###
+
+settings_fragment('databases')
+
+
+### 
+#
+# Logging
+#
+###
+
+settings_fragment('logging')
+
+
+### 
+#
+# Authentication
+#
+###
+
+settings_fragment('authentication')
+
+
+### 
+#
+# Email
+#
+###
+
+settings_fragment('email')
